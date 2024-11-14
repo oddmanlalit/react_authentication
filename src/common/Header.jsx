@@ -40,8 +40,8 @@ import { Routes, Route } from 'react-router-dom';
           <Routes>
           <Route exact path="/" element ={ <Home/> }/>
           <Route exact path="/profile" element ={  <Profile  user={this.state.user}    /> }/>
-          <Route exact path="/login" element ={ <Login/> } />
-          <Route exact path="/register" element ={ <Register /> }/>
+          <Route exact path="/login" element ={ <Login user={this.state.user}  /> }  setUser={this.setUser}/>
+          <Route exact path="/register" element ={ <Register user={this.state.user}  setUser={this.setUser}  /> }/>
           <Route exact path="/forget" element ={ <Forget /> }/>
           </Routes> 
       </div>
