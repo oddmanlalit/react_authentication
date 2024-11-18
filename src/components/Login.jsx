@@ -24,15 +24,16 @@ export default class login extends Component {
         axios.post('/login', data)
         
           .then((response) =>{
-           // console.log(response);
-           localStorage.setItem('token',response.data.token);
+           localStorage.setItem('token',response.data.token)
            this.setState({
              loggedIn:true
            })
+          
            this.props.setUser(response.data.user)
+           
           })
           .catch((error)=> {
-            console.log(error);
+            this.setState({message:error.response.data.message})
           });
     } 
     //login for submit end 
@@ -44,6 +45,24 @@ export default class login extends Component {
     if(this.state.loggedIn){
         return <Navigate  to={'/profile'}/>
     }
+
+    if(localStorage.getItem('token')){
+      return <Navigate  to={'/profile'}/>
+    } 
+
+     ///show Error message
+     let error ="";
+     if(this.state.message){
+         error =(
+               <div>
+                   <div class="alert alert-danger" role="alert">
+                     {this.state.message}
+                   </div>
+               </div>
+         ) 
+     }
+
+
     return (
     <div>
         <br/> <br/> <br/>
@@ -52,6 +71,7 @@ export default class login extends Component {
                     <h3 class="text-center" >Login Account</h3>
 
                     <Form onSubmit={this.formSubmit}>
+                      {error}
                     <Form.Group className="mb-3" >
                         <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" name="email" placeholder="Enter email" required onChange={(e)=>{this.setState({email:e.target.value})}} />

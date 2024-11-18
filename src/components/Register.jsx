@@ -13,7 +13,7 @@ export default class register extends Component {
         message:''
    }
 
-   //login for submit start
+   //Registration form  submit start
    formSubmit =(e) =>{
     const data = {
         name:this.state.name,
@@ -27,18 +27,18 @@ export default class register extends Component {
     axios.post('/register', data)
     
       .then((response) =>{
-       // console.log(response);
-       localStorage.setItem('token',response.data.token);
+       localStorage.setItem('token',response.data.token)
        this.setState({
          loggedIn:true
        })
+       
        this.props.setUser(response.data.user)
       })
       .catch((error)=> {
         console.log(error);
       });
     } 
-    //login for submit end 
+    //Registration form submit end 
 
   render() {
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { Link, Navigate  } from 'react-router-dom';
 
 export default class profile extends Component {
   render() {
@@ -8,6 +9,10 @@ export default class profile extends Component {
     if(this.props.user){
        name = this.props.user.name;
        email= this.props.user.email;
+    }
+
+    if(!localStorage.getItem('token')){
+      return <Navigate  to={'/login'}/>
     }
 
     return (

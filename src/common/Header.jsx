@@ -5,6 +5,7 @@ import Profile from '../components/Profile';
 import Login from '../components/Login';
 import Register from '../components/Register';
 import Forget from '../components/Forget';
+import Reset from '../components/Reset';
 import axios from 'axios';
 
 import { Routes, Route } from 'react-router-dom';
@@ -29,8 +30,7 @@ import { Routes, Route } from 'react-router-dom';
   }
 
   setUser = (user) =>{
-    console.log(user);
-     this.setState({user:user})
+       this.setState({user:user})
   }
 
   render() {
@@ -40,9 +40,10 @@ import { Routes, Route } from 'react-router-dom';
           <Routes>
           <Route exact path="/" element ={ <Home/> }/>
           <Route exact path="/profile" element ={  <Profile  user={this.state.user}    /> }/>
-          <Route exact path="/login" element ={ <Login user={this.state.user}  /> }  setUser={this.setUser}/>
+          <Route exact path="/login" element ={ <Login user={this.state.user}     setUser={this.setUser}/>}/>
           <Route exact path="/register" element ={ <Register user={this.state.user}  setUser={this.setUser}  /> }/>
           <Route exact path="/forget" element ={ <Forget /> }/>
+          <Route path="/reset/:id" element={<Reset />} />
           </Routes> 
       </div>
     )
